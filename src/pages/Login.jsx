@@ -1,3 +1,5 @@
+import { Section } from 'shared/Section';
+
 export const Login = () => {
-  return <div>Login page</div>;
+  return <Section>Login page</Section>;
 };

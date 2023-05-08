@@ -1,3 +1,5 @@
+import { Section } from 'shared/Section';
+
 export const NotFound = () => {
-  return <div>NotFound page</div>;
+  return <Section>NotFound page</Section>;
 };

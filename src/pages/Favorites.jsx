@@ -1,3 +1,5 @@
+import { Section } from 'shared/Section';
+
 export const Favorites = () => {
-  return <div>Favorites page</div>;
+  return <Section>Favorites page</Section>;
 };

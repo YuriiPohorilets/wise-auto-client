@@ -1,3 +1,5 @@
+import { Section } from 'shared/Section';
+
 export const Profile = () => {
-  return <div>Profile page</div>;
+  return <Section>Profile page</Section>;
 };

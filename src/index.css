@@ -1,5 +1,9 @@
-@import 'node_modules/modern-normalize/modern-normalize.css';
+@import-normalize;
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;900&display=swap');
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -11,4 +15,23 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }

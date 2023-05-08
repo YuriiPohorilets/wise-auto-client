@@ -1,3 +1,5 @@
+import { Section } from 'shared/Section';
+
 export const FindCar = () => {
-  return <div>FindCar page</div>;
+  return <Section>FindCar page</Section>;
 };

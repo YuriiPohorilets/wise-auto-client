@@ -1,3 +1,5 @@
+import { Section } from 'shared/Section';
+
 export const Register = () => {
-  return <div>Register page</div>;
+  return <Section>Register page</Section>;
 };

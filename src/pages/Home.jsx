@@ -1,3 +1,5 @@
+import { Section } from 'shared/Section';
+
 export const Home = () => {
-  return <div>Home page</div>;
+  return <Section>Home page</Section>;
 };
