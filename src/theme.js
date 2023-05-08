@@ -5,12 +5,13 @@ export const theme = createTheme({
     primary: {
       main: '#525E75',
       accent: '#92BA92',
-      active: '#78938A',
+      darker: '#78938A',
     },
     neutral: {
       main: '#F1DDBF',
-      err: '#FF6161',
+      light: '#ffffff',
       accent: 'rgba(146, 186, 146, 0.1)',
+      err: '#FF6161',
     },
   },
   typography: {
