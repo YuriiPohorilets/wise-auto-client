@@ -3,17 +3,27 @@ import { List, ListItem, Button } from '@mui/material';
 import { authListStyle, authItemStyle } from './authBarStyles';
 import { outlinedBtnStyle, containedBtnStyle } from 'shared/commonStyles';
 
-export const AuthBar = () => {
+export const AuthBar = ({ sxDisplay, textColor, onClick }) => {
   return (
-    <List sx={authListStyle}>
+    <List sx={{ ...authListStyle, ...sxDisplay }}>
       <ListItem sx={authItemStyle}>
-        <Button component={NavLink} to={'/login'} sx={containedBtnStyle}>
+        <Button
+          component={NavLink}
+          to={'/login'}
+          onClick={onClick}
+          sx={{ ...containedBtnStyle, ...textColor }}
+        >
           Sign in
         </Button>
       </ListItem>
 
       <ListItem sx={authItemStyle}>
-        <Button component={NavLink} to={'/register'} sx={outlinedBtnStyle}>
+        <Button
+          component={NavLink}
+          to={'/register'}
+          onClick={onClick}
+          sx={{ ...outlinedBtnStyle, ...textColor }}
+        >
           Sign up
         </Button>
       </ListItem>
