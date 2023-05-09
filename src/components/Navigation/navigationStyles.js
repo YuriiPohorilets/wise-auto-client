@@ -57,6 +57,8 @@ export const menuContainerStyle = {
   gap: '24px',
 
   bgcolor: 'primary.main',
+
+  overflowY: 'auto',
 };
 
 export const menuListStyle = {

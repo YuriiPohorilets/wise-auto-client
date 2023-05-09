@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from 'components/Layout/Layout';
 import { NotFound } from 'pages/NotFound';
-import { Home } from 'pages/Home';
+import { Home } from 'pages/Home/Home';
 import { Profile } from 'pages/Profile';
 import { FindCar } from 'pages/FindCar';
 import { News } from 'pages/News';

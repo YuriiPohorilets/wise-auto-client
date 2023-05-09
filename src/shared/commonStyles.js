@@ -1,7 +1,7 @@
 // ======================================================================
 // BUTTONS STYLES
 // ======================================================================
-export const baseBtnStyle = {
+export const baseBtn = {
   p: '8px 24px',
 
   fontWeight: 400,
@@ -14,16 +14,16 @@ export const baseBtnStyle = {
   borderRadius: '8px',
 };
 
-export const outlinedBtnStyle = {
-  ...baseBtnStyle,
+export const outlinedBtn = {
+  ...baseBtn,
   '&:hover, &.active': { bgcolor: 'neutral.accent', boxShadow: 3 },
   color: 'primary.main',
   bgcolor: 'transparent',
   border: '1px solid #92BA92',
 };
 
-export const containedBtnStyle = {
-  ...baseBtnStyle,
+export const containedBtn = {
+  ...baseBtn,
   '&:hover, &.active': { bgcolor: 'primary.darker', boxShadow: 3 },
   color: 'neutral.light',
   bgcolor: 'primary.accent',
