@@ -4,17 +4,17 @@ import { List, ListItem, Button, Box } from '@mui/material';
 import { Menu as MenuIcon, Close as CloseIcon } from '@mui/icons-material';
 import { Logo } from 'components/Logo/Logo';
 import { AuthBar } from 'components/AuthBar/AuthBar';
-import { navList } from 'refs/constants';
+import { navItemList } from 'refs/constants';
 import {
-  navListStyle,
-  navItemStyle,
-  navBtnStyle,
-  menuWrapperStyle,
-  menuBtnStyle,
-  menuCloseBtnStyle,
-  menuContainerStyle,
-  menuListStyle,
-  menuItemStyle,
+  navList,
+  navItem,
+  navBtn,
+  menuWrapper,
+  menuBtn,
+  menuCloseBtn,
+  menuContainer,
+  menuList,
+  menuItem,
 } from './navigationStyles';
 
 export const Navigation = () => {
@@ -26,15 +26,15 @@ export const Navigation = () => {
 
   return (
     <>
-      <Box sx={menuWrapperStyle}>
-        <Button sx={menuBtnStyle} onClick={handleMenuClick}>
+      <Box sx={menuWrapper}>
+        <Button sx={menuBtn} onClick={handleMenuClick}>
           <MenuIcon fontSize="large" />
         </Button>
       </Box>
 
       {menuIsOpen && (
-        <Box sx={menuContainerStyle}>
-          <Button sx={menuCloseBtnStyle} onClick={handleMenuClick}>
+        <Box sx={menuContainer}>
+          <Button sx={menuCloseBtn} onClick={handleMenuClick}>
             <CloseIcon fontSize="large" />
           </Button>
 
@@ -46,16 +46,11 @@ export const Navigation = () => {
             textColor={{ color: 'neutral.light' }}
           />
 
-          <List sx={menuListStyle}>
-            {navList.map(({ name, path }) => {
+          <List sx={menuList}>
+            {navItemList.map(({ name, path }) => {
               return (
-                <ListItem key={name} sx={navItemStyle}>
-                  <Button
-                    component={NavLink}
-                    to={path}
-                    onClick={handleMenuClick}
-                    sx={menuItemStyle}
-                  >
+                <ListItem key={name} sx={navItem}>
+                  <Button component={NavLink} to={path} onClick={handleMenuClick} sx={menuItem}>
                     {name}
                   </Button>
                 </ListItem>
@@ -65,11 +60,11 @@ export const Navigation = () => {
         </Box>
       )}
 
-      <List sx={navListStyle}>
-        {navList.map(({ name, path }) => {
+      <List sx={navList}>
+        {navItemList.map(({ name, path }) => {
           return (
-            <ListItem key={name} sx={navItemStyle}>
-              <Button component={NavLink} to={path} sx={navBtnStyle}>
+            <ListItem key={name} sx={navItem}>
+              <Button component={NavLink} to={path} sx={navBtn}>
                 {name}
               </Button>
             </ListItem>

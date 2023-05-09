@@ -27,6 +27,7 @@ export const subtitle = {
 
 export const btn = {
   ...containedBtn,
+
   fontSize: { xs: '24px', md: '32px' },
   px: '64px',
 };

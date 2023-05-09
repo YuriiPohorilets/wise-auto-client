@@ -1,16 +1,16 @@
-export const navListStyle = {
+export const navList = {
   p: 0,
   display: { xs: 'none', md: 'flex' },
   alignItems: 'center',
   gap: '8px',
 };
 
-export const navItemStyle = {
+export const navItem = {
   p: 0,
   width: 'auto',
 };
 
-export const navBtnStyle = {
+export const navBtn = {
   '&:hover': { color: 'primary.accent' },
   '&.active': { color: 'primary.accent' },
 
@@ -22,17 +22,17 @@ export const navBtnStyle = {
   textTransform: 'none',
 };
 
-export const menuWrapperStyle = {
+export const menuWrapper = {
   display: { xs: 'block', md: 'none' },
 };
 
-export const menuBtnStyle = {
+export const menuBtn = {
   '&:hover': { color: 'primary.accent' },
 
   color: 'primary.main',
 };
 
-export const menuCloseBtnStyle = {
+export const menuCloseBtn = {
   '&:hover': { color: 'primary.accent', bgcolor: 'neutral.accent' },
 
   position: 'absolute',
@@ -42,7 +42,7 @@ export const menuCloseBtnStyle = {
   color: 'neutral.light',
 };
 
-export const menuContainerStyle = {
+export const menuContainer = {
   position: 'absolute',
   top: 0,
   left: 0,
@@ -61,14 +61,14 @@ export const menuContainerStyle = {
   overflowY: 'auto',
 };
 
-export const menuListStyle = {
+export const menuList = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   gap: '8px',
 };
 
-export const menuItemStyle = {
+export const menuItem = {
   '&:hover': { color: 'primary.accent', bgcolor: 'neutral.accent' },
   '&.active': { color: 'primary.accent' },
 

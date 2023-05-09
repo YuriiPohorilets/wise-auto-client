@@ -1,28 +1,28 @@
 import { NavLink } from 'react-router-dom';
 import { List, ListItem, Button } from '@mui/material';
-import { authListStyle, authItemStyle } from './authBarStyles';
-import { outlinedBtnStyle, containedBtnStyle } from 'shared/commonStyles';
+import { authList, authItem } from './authBarStyles';
+import { outlinedBtn, containedBtn } from 'shared/commonStyles';
 
 export const AuthBar = ({ sxDisplay, textColor, onClick }) => {
   return (
-    <List sx={{ ...authListStyle, ...sxDisplay }}>
-      <ListItem sx={authItemStyle}>
+    <List sx={{ ...authList, ...sxDisplay }}>
+      <ListItem sx={authItem}>
         <Button
           component={NavLink}
           to={'/login'}
           onClick={onClick}
-          sx={{ ...containedBtnStyle, ...textColor }}
+          sx={{ ...containedBtn, ...textColor }}
         >
           Sign in
         </Button>
       </ListItem>
 
-      <ListItem sx={authItemStyle}>
+      <ListItem sx={authItem}>
         <Button
           component={NavLink}
           to={'/register'}
           onClick={onClick}
-          sx={{ ...outlinedBtnStyle, ...textColor }}
+          sx={{ ...outlinedBtn, ...textColor }}
         >
           Sign up
         </Button>

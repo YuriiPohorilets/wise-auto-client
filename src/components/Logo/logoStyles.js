@@ -1,4 +1,4 @@
-export const logoStyle = {
+export const logo = {
   fontWeight: 900,
   fontSize: '32px',
   lineHeight: 1.5,
@@ -6,7 +6,7 @@ export const logoStyle = {
   textDecoration: 'none',
 };
 
-export const accentStyle = {
-  ...logoStyle,
+export const accent = {
+  ...logo,
   color: 'primary.main',
 };

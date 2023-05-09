@@ -3,13 +3,13 @@ import { Container } from 'shared/Container';
 import { Logo } from 'components/Logo/Logo';
 import { Navigation } from 'components/Navigation/Navigation';
 import { AuthBar } from 'components/AuthBar/AuthBar';
-import { appBarStyle, wrapperStyle } from './appBarStyles';
+import { appBar, wrapper } from './appBarStyles';
 
 export const AppBar = () => {
   return (
-    <MuiAppBar position="static" sx={appBarStyle}>
+    <MuiAppBar position="static" sx={appBar}>
       <Container>
-        <Box sx={wrapperStyle}>
+        <Box sx={wrapper}>
           <Logo />
           <Navigation />
           <AuthBar />

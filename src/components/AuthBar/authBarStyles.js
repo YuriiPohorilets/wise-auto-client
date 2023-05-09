@@ -1,4 +1,4 @@
-export const authListStyle = {
+export const authList = {
   p: 0,
   display: { xs: 'none', md: 'flex' },
   alignItems: 'center',
@@ -7,7 +7,7 @@ export const authListStyle = {
   flexWrap: 'wrap',
 };
 
-export const authItemStyle = {
+export const authItem = {
   p: 0,
   width: 'auto',
 };

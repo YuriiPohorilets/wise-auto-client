@@ -1,12 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import { Typography } from '@mui/material';
-import { logoStyle, accentStyle } from './logoStyles';
+import { logo, accent } from './logoStyles';
 
 export const Logo = ({ sxColor, onClick }) => {
   return (
-    <Typography noWrap component={NavLink} to="/" onClick={onClick} sx={logoStyle}>
+    <Typography noWrap component={NavLink} to="/" onClick={onClick} sx={logo}>
       Wise
-      <Typography component="span" sx={{ ...accentStyle, ...sxColor }}>
+      <Typography component="span" sx={{ ...accent, ...sxColor }}>
         Auto
       </Typography>
     </Typography>
