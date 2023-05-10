@@ -4,7 +4,7 @@ import { NotFound } from 'pages/NotFound';
 import { Home } from 'pages/Home/Home';
 import { Profile } from 'pages/Profile';
 import { FindCar } from 'pages/FindCar';
-import { News } from 'pages/News';
+import { News } from 'pages/News/News';
 import { Services } from 'pages/Services';
 import { Register } from 'pages/Register';
 import { Login } from 'pages/Login';

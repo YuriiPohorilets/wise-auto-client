@@ -17,7 +17,7 @@ export const Home = () => {
             <Logo /> helps you shop and sell with confidence
           </Typography>
 
-          <Button component={NavLink} to={'/notice'} sx={btn}>
+          <Button component={NavLink} to={'/404'} sx={btn}>
             Let's start
           </Button>
         </Box>
