@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/wise-auto-client/static/css/main.e471737a.css",
-    "main.js": "/wise-auto-client/static/js/main.7f3d354a.js",
+    "main.js": "/wise-auto-client/static/js/main.9e8381da.js",
     "static/media/preview.webp": "/wise-auto-client/static/media/preview.10d4f6c100599e90cb3f.webp",
     "index.html": "/wise-auto-client/index.html",
     "main.e471737a.css.map": "/wise-auto-client/static/css/main.e471737a.css.map",
-    "main.7f3d354a.js.map": "/wise-auto-client/static/js/main.7f3d354a.js.map"
+    "main.9e8381da.js.map": "/wise-auto-client/static/js/main.9e8381da.js.map"
   },
   "entrypoints": [
     "static/css/main.e471737a.css",
-    "static/js/main.7f3d354a.js"
+    "static/js/main.9e8381da.js"
   ]
 }
