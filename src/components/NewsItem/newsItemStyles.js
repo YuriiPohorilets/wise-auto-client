@@ -1,5 +1,5 @@
 export const newsCard = {
-  '&:hover': { bgcolor: 'neutral.accent' },
+  '&:hover': { bgcolor: 'neutral.accent', boxShadow: 3 },
 
   maxWidth: '350px',
   height: '502px',

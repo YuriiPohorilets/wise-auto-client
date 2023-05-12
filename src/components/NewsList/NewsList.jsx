@@ -1,17 +1,15 @@
-import { useGetNewsQuery } from 'services/wiseAutoApi';
-import { List } from '@mui/material';
+import { List, Typography } from '@mui/material';
 import { NewsItem } from 'components/NewsItem/NewsItem';
-import { newsList } from './newsListStyles';
+import { newsList, notFoundQuery } from './newsListStyles';
 
-export const NewsList = () => {
-  const { data, error, isLoading } = useGetNewsQuery();
-
-  console.log(error);
-  console.log(isLoading);
-
+export const NewsList = ({ data }) => {
   return (
     <List sx={newsList}>
-      {data?.result.map(news => {
+      {data?.length === 0 && (
+        <Typography sx={notFoundQuery}>Nothing was found for your request</Typography>
+      )}
+
+      {data?.map(news => {
         return <NewsItem key={news._id} news={news} />;
       })}
     </List>

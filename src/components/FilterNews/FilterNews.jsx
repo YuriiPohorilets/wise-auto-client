@@ -1,21 +1,21 @@
 import { Box, FormControl, InputLabel, OutlinedInput, InputAdornment } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
+import { formWrapper, formControl, input } from './filterNewsStyles';
 
-export const FilterNews = () => {
+export const FilterNews = ({ onChange, value }) => {
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', mb: '32px' }}>
-      <FormControl sx={{ width: '700px', mx: 'auto' }} variant="outlined">
+    <Box component="form" sx={formWrapper}>
+      <FormControl sx={formControl} variant="outlined">
         <InputLabel>Find news</InputLabel>
 
         <OutlinedInput
+          onChange={onChange}
+          value={value}
           type="text"
-          sx={{ pr: '24px', borderRadius: '8px' }}
+          sx={input}
           endAdornment={
             <InputAdornment position="end">
-              <IconButton aria-label="Find news" edge="end" sx={{ borderRadius: '8px' }}>
-                <SearchIcon />
-              </IconButton>
+              <SearchIcon />
             </InputAdornment>
           }
           label="Find news"

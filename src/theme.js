@@ -7,6 +7,9 @@ export const theme = createTheme({
       accent: '#92BA92',
       darker: '#78938A',
     },
+    secondary: {
+      main: '#92BA92',
+    },
     neutral: {
       main: '#F1DDBF',
       light: '#ffffff',
