@@ -8,4 +8,5 @@ export const newsList = {
 
 export const notFoundQuery = {
   fontSize: '24px',
+  textAlign: 'center',
 };

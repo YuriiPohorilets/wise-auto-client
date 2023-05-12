@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { wiseAutoApi } from 'services/wiseAutoApi';
+import { newsApi } from 'services/newsApi';
 
 export const store = configureStore({
   reducer: {
-    [wiseAutoApi.reducerPath]: wiseAutoApi.reducer,
+    [newsApi.reducerPath]: newsApi.reducer,
   },
 
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(wiseAutoApi.middleware),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(newsApi.middleware),
 });
 
 setupListeners(store.dispatch);

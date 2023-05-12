@@ -10,6 +10,5 @@ export const formControl = {
 };
 
 export const input = {
-  pr: '24px',
   borderRadius: '8px',
 };
