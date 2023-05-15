@@ -27,9 +27,6 @@ export const News = () => {
     news.title.toLowerCase().includes(filter.toLowerCase())
   );
 
-  console.log(error);
-  console.log(isLoading);
-
   return (
     <Section>
       <Title>News</Title>
