@@ -12,64 +12,52 @@ import {
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { containedBtn } from 'shared/commonStyles';
+import {
+  formWrapper,
+  inputWrapper,
+  formControl,
+  inputLabel,
+  inputText,
+  footerLink,
+} from 'shared/commonStyles';
 
 export const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleClickShowPassword = () => setShowPassword(show => !show);
+  const handleShowPassword = () => setShowPassword(show => !show);
 
   const handleSubmit = e => {
     e.preventDefault();
   };
 
   return (
-    <Box
-      component="form"
-      onSubmit={handleSubmit}
-      sx={{
-        m: '0 auto',
-        p: { xs: '24px 24px', md: '24px 72px' },
-        maxWidth: '750px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-
-        bgcolor: 'neutral.accent',
-        border: '1px solid #78938A',
-        borderRadius: '16px',
-      }}
-    >
-      <Box
-        sx={{ display: 'flex', flexDirection: 'column', gap: '36px', width: '100%', mb: '40px' }}
-      >
-        <FormControl sx={{ width: '100%', color: 'primary.main' }} variant="outlined">
-          <InputLabel htmlFor="Email" sx={{ color: 'primary.main' }}>
+    <Box component="form" onSubmit={handleSubmit} sx={formWrapper}>
+      <Box sx={inputWrapper}>
+        <FormControl variant="outlined" sx={formControl}>
+          <InputLabel htmlFor="Email" sx={inputLabel}>
             Email
           </InputLabel>
-          <OutlinedInput
-            id="email"
-            type="email"
-            required
-            label="Email"
-            sx={{ borderRadius: '8px', bgcolor: 'neutral.accent', color: 'primary.main' }}
-          />
+
+          <OutlinedInput id="email" type="email" label="Email" required sx={inputText} />
         </FormControl>
 
-        <FormControl sx={{ width: '100%' }} variant="outlined">
-          <InputLabel htmlFor="password">Password</InputLabel>
+        <FormControl variant="outlined">
+          <InputLabel htmlFor="password" sx={inputLabel}>
+            Password
+          </InputLabel>
+
           <OutlinedInput
             id="password"
             type={showPassword ? 'text' : 'password'}
-            required
             label="Password"
-            sx={{ borderRadius: '8px', bgcolor: 'neutral.accent', color: 'primary.main' }}
+            required
+            sx={inputText}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
                   edge="end"
+                  onClick={handleShowPassword}
                 >
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
@@ -85,11 +73,7 @@ export const LoginForm = () => {
 
       <Typography>
         Not a member?{' '}
-        <Typography
-          component={NavLink}
-          to={'/register'}
-          sx={{ '&:hover': { color: 'primary.darker' }, color: 'primary.accent' }}
-        >
+        <Typography component={NavLink} to={'/register'} sx={footerLink}>
           Sign up
         </Typography>{' '}
         now

@@ -11,21 +11,39 @@ import {
   Button,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { containedBtn } from 'shared/commonStyles';
+import { containedBtn, outlinedBtn } from 'shared/commonStyles';
+import {
+  formWrapper,
+  formTitle,
+  inputWrapper,
+  formControl,
+  inputLabel,
+  inputText,
+  footerLink,
+  btnFormWrapper,
+} from 'shared/commonStyles';
 
 export const RegisterForm = () => {
   const [step, setStep] = useState(1);
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState('');
+  const [city, setCity] = useState('');
+  const [phone, setPhone] = useState('');
 
   const maxSteps = 2;
 
-  const handleClickShowPassword = () => setShowPassword(show => !show);
+  const handleShowPassword = () => setShowPassword(show => !show);
 
   const handleNextStep = () => {
-    if (step < maxSteps) {
-      setStep(prevStep => prevStep + 1);
-    }
+    if (step < maxSteps) setStep(prevStep => prevStep + 1);
+    return;
+  };
 
+  const handlePrevStep = () => {
+    if (step >= maxSteps) setStep(prevStep => prevStep - 1);
     return;
   };
 
@@ -34,102 +52,150 @@ export const RegisterForm = () => {
   };
 
   return (
-    <Box
-      component="form"
-      onSubmit={handleSubmit}
-      sx={{
-        m: '0 auto',
-        p: { xs: '24px 24px', md: '24px 72px' },
-
-        maxWidth: '750px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-
-        bgcolor: 'neutral.accent',
-        border: '1px solid #78938A',
-        borderRadius: '16px',
-      }}
-    >
-      <Typography sx={{ fontSize: '32px', mb: '24px' }}>
+    <Box component="form" onSubmit={handleSubmit} sx={formWrapper}>
+      <Typography sx={formTitle}>
         Step {step}/{maxSteps}
       </Typography>
 
-      <Box
-        sx={{ display: 'flex', flexDirection: 'column', gap: '36px', width: '100%', mb: '40px' }}
-      >
-        <FormControl sx={{ width: '100%', color: 'primary.main' }} variant="outlined">
-          <InputLabel htmlFor="Email" sx={{ color: 'primary.main' }}>
-            Email
-          </InputLabel>
-          <OutlinedInput
-            id="email"
-            type="email"
-            required
-            label="Email"
-            sx={{ borderRadius: '8px', bgcolor: 'neutral.accent', color: 'primary.main' }}
-          />
-        </FormControl>
+      {step === 1 ? (
+        <Box sx={inputWrapper}>
+          <FormControl sx={formControl} variant="outlined">
+            <InputLabel htmlFor="Email" sx={inputLabel}>
+              Email
+            </InputLabel>
 
-        <FormControl sx={{ width: '100%' }} variant="outlined">
-          <InputLabel htmlFor="password">Password</InputLabel>
-          <OutlinedInput
-            id="password"
-            type={showPassword ? 'text' : 'password'}
-            required
-            label="Password"
-            sx={{ borderRadius: '8px', bgcolor: 'neutral.accent', color: 'primary.main' }}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
+            <OutlinedInput
+              id="email"
+              type="email"
+              label="Email"
+              value={email}
+              onChange={e => setEmail(e.currentTarget.value)}
+              required
+              sx={inputText}
+            />
+          </FormControl>
 
-        <FormControl sx={{ width: '100%' }} variant="outlined">
-          <InputLabel htmlFor="confirm-password">Confirm password</InputLabel>
-          <OutlinedInput
-            id="confirm-password"
-            type={showPassword ? 'text' : 'password'}
-            required
-            label="Confirm [assword"
-            sx={{ borderRadius: '8px', bgcolor: 'neutral.accent', color: 'primary.main' }}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
+          <FormControl variant="outlined">
+            <InputLabel htmlFor="password">Password</InputLabel>
 
-        <Box sx={{ display: 'flex', gap: '16px' }}>
-          <Button type="button" onClick={handleNextStep} sx={{ ...containedBtn, flex: '1 1 auto' }}>
-            Next step
-          </Button>
+            <OutlinedInput
+              id="password"
+              type={showPassword ? 'text' : 'password'}
+              label="Password"
+              value={password}
+              onChange={e => setPassword(e.currentTarget.value)}
+              required
+              sx={inputText}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    edge="end"
+                    onClick={handleShowPassword}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+
+          <FormControl variant="outlined">
+            <InputLabel htmlFor="confirm-password">Confirm password</InputLabel>
+
+            <OutlinedInput
+              id="confirm-password"
+              type={showPassword ? 'text' : 'password'}
+              label="Confirm password"
+              value={confirmPassword}
+              onChange={e => setConfirmPassword(e.currentTarget.value)}
+              required
+              sx={inputText}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    edge="end"
+                    onClick={handleShowPassword}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+
+          <Box sx={btnFormWrapper}>
+            <Button
+              type="button"
+              onClick={handleNextStep}
+              sx={{ ...containedBtn, flex: '1 1 auto' }}
+            >
+              Next step
+            </Button>
+          </Box>
         </Box>
-      </Box>
+      ) : (
+        <Box sx={inputWrapper}>
+          <FormControl sx={formControl} variant="outlined">
+            <InputLabel htmlFor="Name" sx={inputLabel}>
+              Name
+            </InputLabel>
+
+            <OutlinedInput
+              id="name"
+              type="text"
+              label="Name"
+              value={name}
+              onChange={e => setName(e.currentTarget.value)}
+              required
+              sx={inputText}
+            />
+          </FormControl>
+
+          <FormControl variant="outlined">
+            <InputLabel htmlFor="city">City</InputLabel>
+
+            <OutlinedInput
+              id="city"
+              type="text"
+              label="City"
+              value={city}
+              onChange={e => setCity(e.currentTarget.value)}
+              required
+              sx={inputText}
+            />
+          </FormControl>
+
+          <FormControl variant="outlined">
+            <InputLabel htmlFor="phone">Phone</InputLabel>
+
+            <OutlinedInput
+              id="phone"
+              type="text"
+              label="Phone"
+              value={phone}
+              onChange={e => setPhone(e.currentTarget.value)}
+              required
+              sx={inputText}
+            />
+          </FormControl>
+
+          <Box sx={btnFormWrapper}>
+            <Button type="submit" sx={{ ...containedBtn, flex: '1 1 auto' }}>
+              Register
+            </Button>
+
+            <Button type="button" onClick={handlePrevStep} sx={outlinedBtn}>
+              Back
+            </Button>
+          </Box>
+        </Box>
+      )}
 
       <Typography>
         Already have an account?{' '}
-        <Typography
-          component={NavLink}
-          to={'/login'}
-          sx={{ '&:hover': { color: 'primary.darker' }, color: 'primary.accent' }}
-        >
+        <Typography component={NavLink} to={'/login'} sx={footerLink}>
           Sign in
         </Typography>{' '}
         now
