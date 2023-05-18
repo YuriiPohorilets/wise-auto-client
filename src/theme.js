@@ -9,12 +9,13 @@ export const theme = createTheme({
     },
     secondary: {
       main: '#92BA92',
+      error: '#FF6161',
     },
     neutral: {
       main: '#F1DDBF',
       light: '#ffffff',
       accent: 'rgba(146, 186, 146, 0.1)',
-      err: '#FF6161',
+      error: 'rgba(255, 97, 97, 0.1)',
     },
   },
   typography: {

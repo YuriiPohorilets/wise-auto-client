@@ -1,58 +1,61 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import {
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-  InputAdornment,
-  IconButton,
-  Box,
-  Typography,
-  Button,
-} from '@mui/material';
+import { useFormik } from 'formik';
+import { TextField, Box, Typography, Button, IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { loginSchema } from 'schemas/loginSchema';
+import { useLoginMutation } from 'services/authApi';
 import { containedBtn } from 'shared/commonStyles';
 import {
   formWrapper,
   inputWrapper,
-  formControl,
-  inputLabel,
   inputText,
+  footerContent,
   footerLink,
 } from 'shared/commonStyles';
 
+const initialValues = { email: '', password: '' };
+
 export const LoginForm = () => {
+  const [loginUser, { isLoading }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
+  const { handleSubmit, handleChange, resetForm, values, touched, errors } = useFormik({
+    initialValues,
+    validationSchema: loginSchema,
+    onSubmit: ({ email, password }) => {
+      loginUser({ email, password });
+      console.log(isLoading);
+      resetForm();
+    },
+  });
 
   const handleShowPassword = () => setShowPassword(show => !show);
 
-  const handleSubmit = e => {
-    e.preventDefault();
-  };
-
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={formWrapper}>
+    <Box component="form" onSubmit={handleSubmit} noValidate sx={formWrapper}>
       <Box sx={inputWrapper}>
-        <FormControl variant="outlined" sx={formControl}>
-          <InputLabel htmlFor="Email" sx={inputLabel}>
-            Email
-          </InputLabel>
+        <TextField
+          id="email"
+          type="email"
+          label="Email"
+          value={values.email}
+          onChange={handleChange}
+          error={touched.email && Boolean(errors.email)}
+          helperText={touched.email && errors.email}
+          sx={inputText}
+        />
 
-          <OutlinedInput id="email" type="email" label="Email" required sx={inputText} />
-        </FormControl>
-
-        <FormControl variant="outlined">
-          <InputLabel htmlFor="password" sx={inputLabel}>
-            Password
-          </InputLabel>
-
-          <OutlinedInput
-            id="password"
-            type={showPassword ? 'text' : 'password'}
-            label="Password"
-            required
-            sx={inputText}
-            endAdornment={
+        <TextField
+          id="password"
+          type={showPassword ? 'text' : 'password'}
+          label="Password"
+          value={values.password}
+          onChange={handleChange}
+          error={touched.password && Boolean(errors.password)}
+          helperText={touched.password && errors.password}
+          sx={inputText}
+          InputProps={{
+            endAdornment: (
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
@@ -62,16 +65,16 @@ export const LoginForm = () => {
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
-            }
-          />
-        </FormControl>
+            ),
+          }}
+        />
 
         <Button type="submit" sx={containedBtn}>
           Login
         </Button>
       </Box>
 
-      <Typography>
+      <Typography sx={footerContent}>
         Not a member?{' '}
         <Typography component={NavLink} to={'/register'} sx={footerLink}>
           Sign up

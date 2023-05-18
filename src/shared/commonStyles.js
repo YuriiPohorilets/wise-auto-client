@@ -17,6 +17,7 @@ export const baseBtn = {
 export const outlinedBtn = {
   ...baseBtn,
   '&:hover, &.active': { bgcolor: 'neutral.accent', boxShadow: 3 },
+
   color: 'primary.main',
 
   bgcolor: 'transparent',
@@ -26,6 +27,7 @@ export const outlinedBtn = {
 export const containedBtn = {
   ...baseBtn,
   '&:hover, &.active': { bgcolor: 'primary.darker', boxShadow: 3 },
+
   color: 'neutral.light',
 
   bgcolor: 'primary.accent',
@@ -51,8 +53,9 @@ export const formWrapper = {
 };
 
 export const formTitle = {
-  fontSize: '32px',
   mb: '24px',
+
+  fontSize: '32px',
 };
 
 export const inputWrapper = {
@@ -61,29 +64,22 @@ export const inputWrapper = {
 
   display: 'flex',
   flexDirection: 'column',
-  gap: '36px',
-};
-
-export const formControl = {
-  width: '100%',
-
-  color: 'primary.main',
-};
-
-export const inputLabel = {
-  color: 'primary.main',
+  gap: '24px',
 };
 
 export const inputText = {
-  color: 'primary.main',
+  '.MuiOutlinedInput-root': { borderRadius: '8px' },
 
-  bgcolor: 'neutral.accent',
-  borderRadius: '8px',
+  color: 'primary.main',
 };
 
 export const btnFormWrapper = {
   display: 'flex',
   gap: '16px',
+};
+
+export const footerContent = {
+  textAlign: 'center',
 };
 
 export const footerLink = {
