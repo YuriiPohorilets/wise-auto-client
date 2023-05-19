@@ -1,7 +1,15 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { TextField, Box, Typography, Button, IconButton, InputAdornment } from '@mui/material';
+import {
+  TextField,
+  Box,
+  Typography,
+  Button,
+  IconButton,
+  InputAdornment,
+  LinearProgress,
+} from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { registerSchema } from 'schemas/registerSchema';
 import { useRegisterMutation } from 'services/wiseAutoApi';
@@ -62,6 +70,20 @@ export const RegisterForm = () => {
       <Typography sx={formTitle}>
         Step {step}/{maxSteps}
       </Typography>
+
+      {isLoading && (
+        <Box sx={{ width: '100%', mb: '24px' }}>
+          <LinearProgress />
+        </Box>
+      )}
+
+      {isError && (
+        <Box sx={{ width: '100%', mb: '24px' }}>
+          <Typography sx={{ textAlign: 'center', color: 'secondary.error' }}>
+            {error.message}
+          </Typography>
+        </Box>
+      )}
 
       {step === 1 ? (
         <Box sx={inputWrapper}>
