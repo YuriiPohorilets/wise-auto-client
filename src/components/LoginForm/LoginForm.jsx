@@ -1,7 +1,15 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { TextField, Box, Typography, Button, IconButton, InputAdornment } from '@mui/material';
+import {
+  TextField,
+  Box,
+  Typography,
+  Button,
+  IconButton,
+  InputAdornment,
+  LinearProgress,
+} from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { loginSchema } from 'schemas/loginSchema';
 import { useLoginMutation } from 'services/wiseAutoApi';
@@ -34,8 +42,24 @@ export const LoginForm = () => {
 
   const handleShowPassword = () => setShowPassword(show => !show);
 
+  const isValidForm = !values.email || !values.password || !!errors.email || !!errors.password;
+
   return (
     <Box component="form" noValidate onSubmit={handleSubmit} sx={formWrapper}>
+      {isLoading && (
+        <Box sx={{ width: '100%', mb: '24px' }}>
+          <LinearProgress />
+        </Box>
+      )}
+
+      {isError && (
+        <Box sx={{ width: '100%', mb: '24px' }}>
+          <Typography sx={{ textAlign: 'center', color: 'secondary.error' }}>
+            {error.message}
+          </Typography>
+        </Box>
+      )}
+
       <Box sx={inputWrapper}>
         <TextField
           id="email"
@@ -43,7 +67,7 @@ export const LoginForm = () => {
           label="Email"
           value={values.email}
           onChange={handleChange}
-          error={touched.email && Boolean(errors.email)}
+          error={touched.email && !!errors.email}
           helperText={touched.email && errors.email}
           sx={inputText}
         />
@@ -54,7 +78,7 @@ export const LoginForm = () => {
           label="Password"
           value={values.password}
           onChange={handleChange}
-          error={touched.password && Boolean(errors.password)}
+          error={touched.password && !!errors.password}
           helperText={touched.password && errors.password}
           sx={inputText}
           InputProps={{
@@ -72,7 +96,7 @@ export const LoginForm = () => {
           }}
         />
 
-        <Button type="submit" sx={containedBtn}>
+        <Button type="submit" disabled={isValidForm} sx={containedBtn}>
           Login
         </Button>
       </Box>

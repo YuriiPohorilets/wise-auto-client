@@ -31,9 +31,10 @@ export const RegisterForm = () => {
 
   const maxSteps = 2;
 
-  const { handleSubmit, handleChange, resetForm, values, touched, errors } = useFormik({
+  const { handleSubmit, handleChange, resetForm, handleBlur, values, touched, errors } = useFormik({
     initialValues,
     validationSchema: registerSchema,
+
     onSubmit: async ({ email, password, name, city, phone }) => {
       try {
         await registerUser({ email, password, name, city, phone }).unwrap();
@@ -71,8 +72,9 @@ export const RegisterForm = () => {
             label="Email"
             value={values.email}
             onChange={handleChange}
-            error={touched.email && Boolean(errors.email)}
+            error={touched.email && !!errors.email}
             helperText={touched.email && errors.email}
+            onBlur={handleBlur('email')}
             sx={inputText}
           />
 
@@ -82,8 +84,9 @@ export const RegisterForm = () => {
             label="Password"
             value={values.password}
             onChange={handleChange}
-            error={touched.password && Boolean(errors.password)}
+            error={touched.password && !!errors.password}
             helperText={touched.password && errors.password}
+            onBlur={handleBlur('password')}
             sx={inputText}
             InputProps={{
               endAdornment: (
@@ -106,8 +109,9 @@ export const RegisterForm = () => {
             label="Confirm Password"
             value={values.confirmPassword}
             onChange={handleChange}
-            error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+            error={touched.confirmPassword && !!errors.confirmPassword}
             helperText={touched.confirmPassword && errors.confirmPassword}
+            onBlur={handleBlur('confirmPassword')}
             sx={inputText}
             InputProps={{
               endAdornment: (
@@ -127,7 +131,7 @@ export const RegisterForm = () => {
           <Box sx={btnFormWrapper}>
             <Button
               type="button"
-              // disabled={errors ? true : false}
+              disabled={!!values || !!errors}
               onClick={handleNextStep}
               sx={{
                 ...containedBtn,
@@ -147,7 +151,7 @@ export const RegisterForm = () => {
             label="Name"
             value={values.name}
             onChange={handleChange}
-            error={touched.name && Boolean(errors.name)}
+            error={touched.name && !!errors.name}
             helperText={touched.name && errors.name}
             sx={inputText}
           />
@@ -158,7 +162,7 @@ export const RegisterForm = () => {
             label="City"
             value={values.city}
             onChange={handleChange}
-            error={touched.city && Boolean(errors.city)}
+            error={touched.city && !!errors.city}
             helperText={touched.city && errors.city}
             sx={inputText}
           />
@@ -169,7 +173,7 @@ export const RegisterForm = () => {
             label="Phone"
             value={values.phone}
             onChange={handleChange}
-            error={touched.phone && Boolean(errors.phone)}
+            error={touched.phone && !!errors.phone}
             helperText={touched.phone && errors.phone}
             sx={inputText}
           />
