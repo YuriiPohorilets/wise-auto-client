@@ -10,6 +10,7 @@ export const theme = createTheme({
     secondary: {
       main: '#92BA92',
       error: '#FF6161',
+      disabled: 'rgba(91, 91, 91, 0.8)',
     },
     neutral: {
       main: '#F1DDBF',

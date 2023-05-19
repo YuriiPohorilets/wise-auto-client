@@ -2,6 +2,7 @@
 // BUTTONS STYLES
 // ======================================================================
 export const baseBtn = {
+  // '.Mui-disabled': { bgcolor: 'secondary.disabled', cursor: 'not-allowed' },
   p: '8px 24px',
 
   fontWeight: 400,

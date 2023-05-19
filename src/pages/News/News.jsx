@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useGetNewsQuery } from 'services/newsApi';
+import { useGetNewsQuery } from 'services/wiseAutoApi';
 import { Section } from 'shared/Section';
 import { Title } from 'shared/Title';
 import { NewsList } from 'components/NewsList/NewsList';

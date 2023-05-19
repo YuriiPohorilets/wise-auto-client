@@ -1,22 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { newsApi } from 'services/newsApi';
-import { authApi } from 'services/authApi';
-
-// const authPersistConfig = {
-//   key: 'auth',
-//   storage,
-//   whitelist: ['token'],
-// };
+import { wiseAutoApi } from 'services/wiseAutoApi';
 
 export const store = configureStore({
   reducer: {
-    [newsApi.reducerPath]: newsApi.reducer,
-    [authApi.reducerPath]: authApi.reducer,
+    [wiseAutoApi.reducerPath]: wiseAutoApi.reducer,
   },
 
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(newsApi.middleware).concat(newsApi.middleware),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(wiseAutoApi.middleware),
 });
 
 setupListeners(store.dispatch);

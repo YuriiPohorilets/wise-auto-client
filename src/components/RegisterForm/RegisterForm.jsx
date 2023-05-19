@@ -1,44 +1,48 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
-import { OutlinedInput, Box, Typography, Button, TextField } from '@mui/material';
+import { TextField, Box, Typography, Button, IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { registerSchema } from 'schemas/registerSchema';
+import { useRegisterMutation } from 'services/wiseAutoApi';
 import { containedBtn, outlinedBtn } from 'shared/commonStyles';
 import {
   formWrapper,
   formTitle,
   inputWrapper,
-  formControl,
-  inputLabel,
   inputText,
   footerLink,
   btnFormWrapper,
 } from 'shared/commonStyles';
 
-export const RegisterForm = () => {
-  const [step, setStep] = useState(1);
-  const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [name, setName] = useState('');
-  const [city, setCity] = useState('');
-  const [phone, setPhone] = useState('');
+const initialValues = {
+  email: '',
+  password: '',
+  confirmPassword: '',
+  name: '',
+  city: '',
+  phone: '',
+};
 
-  const formik = useFormik({
-    initialValues: {
-      email: 'foobar@example.com',
-      password: 'foobar',
-    },
-    validationSchema: registerSchema,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+export const RegisterForm = () => {
+  const [registerUser, { error, isError, isLoading }] = useRegisterMutation();
+  const [showPassword, setShowPassword] = useState(false);
+  const [step, setStep] = useState(1);
 
   const maxSteps = 2;
+
+  const { handleSubmit, handleChange, resetForm, values, touched, errors } = useFormik({
+    initialValues,
+    validationSchema: registerSchema,
+    onSubmit: async ({ email, password, name, city, phone }) => {
+      try {
+        await registerUser({ email, password, name, city, phone }).unwrap();
+      } catch (error) {
+        console.log(error.message);
+      }
+      resetForm();
+    },
+  });
 
   const handleShowPassword = () => setShowPassword(show => !show);
 
@@ -52,12 +56,8 @@ export const RegisterForm = () => {
     return;
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-  };
-
   return (
-    <Box component="form" onSubmit={formik.handleSubmit} sx={formWrapper} noValidate>
+    <Box component="form" noValidate onSubmit={handleSubmit} sx={formWrapper}>
       <Typography sx={formTitle}>
         Step {step}/{maxSteps}
       </Typography>
@@ -65,58 +65,74 @@ export const RegisterForm = () => {
       {step === 1 ? (
         <Box sx={inputWrapper}>
           <TextField
+            id="email"
             type="email"
             variant="outlined"
             label="Email"
-            value={email}
-            onChange={e => setEmail(e.currentTarget.value)}
+            value={values.email}
+            onChange={handleChange}
+            error={touched.email && Boolean(errors.email)}
+            helperText={touched.email && errors.email}
             sx={inputText}
           />
 
           <TextField
-            components={OutlinedInput}
+            id="password"
             type={showPassword ? 'text' : 'password'}
             label="Password"
-            value={password}
-            onChange={e => setPassword(e.currentTarget.value)}
+            value={values.password}
+            onChange={handleChange}
+            error={touched.password && Boolean(errors.password)}
+            helperText={touched.password && errors.password}
             sx={inputText}
-            // endAdornment={
-            //   <InputAdornment position="end">
-            //     <IconButton
-            //       aria-label="toggle password visibility"
-            //       edge="end"
-            //       onClick={handleShowPassword}
-            //     >
-            //       {showPassword ? <VisibilityOff /> : <Visibility />}
-            //     </IconButton>
-            //   </InputAdornment>
-            // }
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    edge="end"
+                    onClick={handleShowPassword}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
 
           <TextField
+            id="confirmPassword"
             type={showPassword ? 'text' : 'password'}
-            label="Confirm password"
-            value={confirmPassword}
-            onChange={e => setConfirmPassword(e.currentTarget.value)}
+            label="Confirm Password"
+            value={values.confirmPassword}
+            onChange={handleChange}
+            error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+            helperText={touched.confirmPassword && errors.confirmPassword}
             sx={inputText}
-            //   endAdornment={
-            //     <InputAdornment position="end">
-            //       <IconButton
-            //         aria-label="toggle password visibility"
-            //         edge="end"
-            //         onClick={handleShowPassword}
-            //       >
-            //         {showPassword ? <VisibilityOff /> : <Visibility />}
-            //       </IconButton>
-            //     </InputAdornment>
-            //   }
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    edge="end"
+                    onClick={handleShowPassword}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
 
           <Box sx={btnFormWrapper}>
             <Button
               type="button"
+              // disabled={errors ? true : false}
               onClick={handleNextStep}
-              sx={{ ...containedBtn, flex: '1 1 auto' }}
+              sx={{
+                ...containedBtn,
+                flex: '1 1 auto',
+              }}
             >
               Next step
             </Button>
@@ -125,31 +141,47 @@ export const RegisterForm = () => {
       ) : (
         <Box sx={inputWrapper}>
           <TextField
+            id="name"
             type="text"
+            variant="outlined"
             label="Name"
-            value={name}
-            onChange={e => setName(e.currentTarget.value)}
+            value={values.name}
+            onChange={handleChange}
+            error={touched.name && Boolean(errors.name)}
+            helperText={touched.name && errors.name}
             sx={inputText}
           />
 
           <TextField
+            id="city"
             type="text"
             label="City"
-            value={city}
-            onChange={e => setCity(e.currentTarget.value)}
+            value={values.city}
+            onChange={handleChange}
+            error={touched.city && Boolean(errors.city)}
+            helperText={touched.city && errors.city}
             sx={inputText}
           />
 
           <TextField
+            id="phone"
             type="text"
             label="Phone"
-            value={phone}
-            onChange={e => setPhone(e.currentTarget.value)}
+            value={values.phone}
+            onChange={handleChange}
+            error={touched.phone && Boolean(errors.phone)}
+            helperText={touched.phone && errors.phone}
             sx={inputText}
           />
 
           <Box sx={btnFormWrapper}>
-            <Button type="submit" sx={{ ...containedBtn, flex: '1 1 auto' }}>
+            <Button
+              type="submit"
+              sx={{
+                ...containedBtn,
+                flex: '1 1 auto',
+              }}
+            >
               Register
             </Button>
 

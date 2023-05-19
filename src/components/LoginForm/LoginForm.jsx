@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { TextField, Box, Typography, Button, IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { loginSchema } from 'schemas/loginSchema';
-import { useLoginMutation } from 'services/authApi';
+import { useLoginMutation } from 'services/wiseAutoApi';
 import { containedBtn } from 'shared/commonStyles';
 import {
   formWrapper,
@@ -17,14 +17,17 @@ import {
 const initialValues = { email: '', password: '' };
 
 export const LoginForm = () => {
-  const [loginUser, { isLoading }] = useLoginMutation();
+  const [loginUser, { error, isError, isLoading }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
   const { handleSubmit, handleChange, resetForm, values, touched, errors } = useFormik({
     initialValues,
     validationSchema: loginSchema,
-    onSubmit: ({ email, password }) => {
-      loginUser({ email, password });
-      console.log(isLoading);
+    onSubmit: async ({ email, password }) => {
+      try {
+        await loginUser({ email, password }).unwrap();
+      } catch (error) {
+        console.log(error.message);
+      }
       resetForm();
     },
   });
@@ -32,7 +35,7 @@ export const LoginForm = () => {
   const handleShowPassword = () => setShowPassword(show => !show);
 
   return (
-    <Box component="form" onSubmit={handleSubmit} noValidate sx={formWrapper}>
+    <Box component="form" noValidate onSubmit={handleSubmit} sx={formWrapper}>
       <Box sx={inputWrapper}>
         <TextField
           id="email"
