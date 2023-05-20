@@ -6,14 +6,14 @@ export const wiseAutoApi = createApi({
 
   endpoints: builder => ({
     login: builder.mutation({
-      query(body) {
+      query(credentials) {
         return {
           url: `auth/login`,
           method: 'POST',
-          body,
+          body: credentials,
         };
       },
-      transformResponse: (response, meta, arg) => response.data,
+
       transformErrorResponse: (response, meta, arg) => response.data,
 
       invalidatesTags: ['Login', 'User'],
@@ -22,14 +22,14 @@ export const wiseAutoApi = createApi({
     }),
 
     register: builder.mutation({
-      query(body) {
+      query(credentials) {
         return {
           url: `auth/signup`,
           method: 'POST',
-          body,
+          body: credentials,
         };
       },
-      transformResponse: (response, meta, arg) => response.data,
+
       transformErrorResponse: (response, meta, arg) => response.data,
 
       invalidatesTags: ['Register', 'User'],
@@ -44,6 +44,7 @@ export const wiseAutoApi = createApi({
           params: { page, limit: 6 },
         };
       },
+
       tagTypes: ['News'],
       providesTags: ['News'],
     }),

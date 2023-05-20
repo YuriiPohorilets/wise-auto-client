@@ -33,7 +33,7 @@ const initialValues = {
 };
 
 export const RegisterForm = () => {
-  const [registerUser, { error, isError, isLoading }] = useRegisterMutation();
+  const [registerUser, { error, isError, isLoading, data }] = useRegisterMutation();
   const [showPassword, setShowPassword] = useState(false);
   const [step, setStep] = useState(1);
 
@@ -49,6 +49,8 @@ export const RegisterForm = () => {
       } catch (error) {
         console.log(error.message);
       }
+
+      console.log(data);
       resetForm();
     },
   });
@@ -153,7 +155,7 @@ export const RegisterForm = () => {
           <Box sx={btnFormWrapper}>
             <Button
               type="button"
-              disabled={!!values || !!errors}
+              // disabled={!!values || !!errors}
               onClick={handleNextStep}
               sx={{
                 ...containedBtn,

@@ -25,17 +25,19 @@ import {
 const initialValues = { email: '', password: '' };
 
 export const LoginForm = () => {
-  const [loginUser, { error, isError, isLoading }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
+  const [loginUser, { error, isError, isLoading }] = useLoginMutation();
+
   const { handleSubmit, handleChange, resetForm, values, touched, errors } = useFormik({
     initialValues,
     validationSchema: loginSchema,
     onSubmit: async ({ email, password }) => {
       try {
-        await loginUser({ email, password }).unwrap();
+        const response = await loginUser({ email, password }).unwrap();
       } catch (error) {
         console.log(error.message);
       }
+
       resetForm();
     },
   });

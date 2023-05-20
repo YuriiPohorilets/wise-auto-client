@@ -4,7 +4,7 @@ import { Title } from 'shared/Title';
 export const FindCar = () => {
   return (
     <Section>
-      <Title>Find car</Title>
+      <Title>Find car </Title>
     </Section>
   );
 };
