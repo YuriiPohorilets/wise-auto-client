@@ -12,6 +12,8 @@ import { Favorites } from 'pages/Favorites';
 import { OwnCars } from 'pages/OwnCars';
 import { AddCar } from 'pages/AddCar';
 import { CarDetails } from 'pages/CarDetails';
+// import { PrivateRoute } from 'shared/PrivateRoute';
+import { RestrictedRoute } from 'shared/RestrictedRoute';
 
 export const App = () => {
   return (
@@ -30,8 +32,14 @@ export const App = () => {
           <Route path="/posts" element={<OwnCars />} />
           <Route path="/add-notice" element={<AddCar />} />
 
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/register"
+            element={<RestrictedRoute component={Register} redirectTo="/profile" />}
+          />
+          <Route
+            path="/login"
+            element={<RestrictedRoute component={Login} redirectTo="/notices" />}
+          />
         </Route>
       </Routes>
     </>
