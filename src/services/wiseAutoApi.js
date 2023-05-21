@@ -37,6 +37,17 @@ export const wiseAutoApi = createApi({
       providesTags: ['Register', 'User'],
     }),
 
+    logout: builder.query({
+      query() {
+        return {
+          url: `/auth/logout`,
+        };
+      },
+
+      tagTypes: ['Logout', 'User'],
+      providesTags: ['Logout', 'User'],
+    }),
+
     getNews: builder.query({
       query(page) {
         return {
@@ -51,4 +62,5 @@ export const wiseAutoApi = createApi({
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useGetNewsQuery } = wiseAutoApi;
+export const { useLoginMutation, useRegisterMutation, useGetNewsQuery, useLogoutQuery } =
+  wiseAutoApi;

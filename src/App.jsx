@@ -17,31 +17,29 @@ import { RestrictedRoute } from 'shared/RestrictedRoute';
 
 export const App = () => {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="*" element={<NotFound />} />
-          <Route index element={<Home />} />
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route path="*" element={<NotFound />} />
+        <Route index element={<Home />} />
 
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/notices" element={<FindCar />} />
-          <Route path="notices/:noticeId" element={<CarDetails />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/posts" element={<OwnCars />} />
-          <Route path="/add-notice" element={<AddCar />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/notices" element={<FindCar />} />
+        <Route path="notices/:noticeId" element={<CarDetails />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/posts" element={<OwnCars />} />
+        <Route path="/add-notice" element={<AddCar />} />
 
-          <Route
-            path="/register"
-            element={<RestrictedRoute component={Register} redirectTo="/profile" />}
-          />
-          <Route
-            path="/login"
-            element={<RestrictedRoute component={Login} redirectTo="/notices" />}
-          />
-        </Route>
-      </Routes>
-    </>
+        <Route
+          path="/register"
+          element={<RestrictedRoute component={Register} redirectTo="/profile" />}
+        />
+        <Route
+          path="/login"
+          element={<RestrictedRoute component={Login} redirectTo="/notices" />}
+        />
+      </Route>
+    </Routes>
   );
 };

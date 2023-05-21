@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { Box, Typography, Button } from '@mui/material';
-import { Section } from 'shared/Section';
+import { Section } from 'components/Section/Section';
 import { Logo } from 'components/Logo/Logo';
 import PreviewImg from 'img/preview.webp';
 import { wrapper, contentWrapper, title, subtitle, btn, imgWrapper } from './homeStyles';

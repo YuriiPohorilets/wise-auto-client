@@ -1,5 +1,5 @@
-import { Section } from 'shared/Section';
-import { Title } from 'shared/Title';
+import { Section } from 'components/Section/Section';
+import { Title } from 'components/Title/Title';
 
 export const Profile = () => {
   return (

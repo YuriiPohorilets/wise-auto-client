@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useGetNewsQuery } from 'services/wiseAutoApi';
-import { Section } from 'shared/Section';
-import { Title } from 'shared/Title';
+import { Section } from 'components/Section/Section';
+import { Title } from 'components/Title/Title';
 import { NewsList } from 'components/NewsList/NewsList';
 import { FilterNews } from 'components/FilterNews/FilterNews';
 import { Pagination } from 'components/Pagination/Pagination';

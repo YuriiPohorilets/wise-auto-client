@@ -33,7 +33,7 @@ export const LoginForm = () => {
     validationSchema: loginSchema,
     onSubmit: async ({ email, password }) => {
       try {
-        const response = await loginUser({ email, password }).unwrap();
+        await loginUser({ email, password }).unwrap();
       } catch (error) {
         console.log(error.message);
       }
@@ -42,9 +42,9 @@ export const LoginForm = () => {
     },
   });
 
-  const handleShowPassword = () => setShowPassword(show => !show);
-
   const isValidForm = !values.email || !values.password || !!errors.email || !!errors.password;
+
+  const handleShowPassword = () => setShowPassword(show => !show);
 
   return (
     <Box component="form" noValidate onSubmit={handleSubmit} sx={formWrapper}>
