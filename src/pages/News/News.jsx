@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useGetNewsQuery } from 'services/wiseAutoApi';
 import { Section } from 'components/Section/Section';
 import { Title } from 'components/Title/Title';
 import { NewsList } from 'components/NewsList/NewsList';
@@ -12,7 +11,6 @@ import { ErrorMsg } from 'components/ErrorMsg/ErrorMsg';
 export const News = () => {
   const [page, setPage] = useState(1);
   const [filter, setFilter] = useState('');
-  const { data, error, isLoading } = useGetNewsQuery(page);
 
   const handleFilterChange = e => {
     setFilter(e.currentTarget.value);
@@ -23,7 +21,7 @@ export const News = () => {
     scrollToTop();
   };
 
-  const filtredNews = data?.result.filter(news =>
+  const filtredNews = []?.result.filter(news =>
     news.title.toLowerCase().includes(filter.toLowerCase())
   );
 
@@ -31,15 +29,15 @@ export const News = () => {
     <Section>
       <Title>News</Title>
       <FilterNews onChange={handleFilterChange} value={filter} />
-      {isLoading && <Loader size={60} />}
-      {error && <ErrorMsg />}
+      {/* {isLoading && <Loader size={60} />}
+      {error && <ErrorMsg />} */}
 
-      {!isLoading && !error && (
+      {/* {!isLoading && !error && (
         <>
           <NewsList data={filtredNews} />
           <Pagination onChange={handleChangePage} page={page} totalHits={data?.totalHits} />
         </>
-      )}
+      )} */}
     </Section>
   );
 };

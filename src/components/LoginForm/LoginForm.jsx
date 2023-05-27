@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import {
   TextField,
@@ -11,8 +12,8 @@ import {
   LinearProgress,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { login } from 'redux/auth/operations';
 import { loginSchema } from 'schemas/loginSchema';
-import { useLoginMutation } from 'services/wiseAutoApi';
 import { containedBtn } from 'shared/commonStyles';
 import {
   formWrapper,
@@ -26,19 +27,20 @@ const initialValues = { email: '', password: '' };
 
 export const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [loginUser, { error, isError, isLoading }] = useLoginMutation();
+  const dispatch = useDispatch();
 
   const { handleSubmit, handleChange, resetForm, values, touched, errors } = useFormik({
     initialValues,
     validationSchema: loginSchema,
-    onSubmit: async ({ email, password }) => {
-      try {
-        await loginUser({ email, password }).unwrap();
-      } catch (error) {
-        console.log(error.message);
-      }
 
-      resetForm();
+    onSubmit: ({ email, password }) => {
+      try {
+        dispatch(login({ email, password }));
+
+        resetForm();
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 
@@ -48,19 +50,19 @@ export const LoginForm = () => {
 
   return (
     <Box component="form" noValidate onSubmit={handleSubmit} sx={formWrapper}>
-      {isLoading && (
+      {/* {isLoading && (
         <Box sx={{ width: '100%', mb: '24px' }}>
           <LinearProgress />
         </Box>
-      )}
+      )} */}
 
-      {isError && (
+      {/* {isError && (
         <Box sx={{ width: '100%', mb: '24px' }}>
           <Typography sx={{ textAlign: 'center', color: 'secondary.error' }}>
             {error.message}
           </Typography>
         </Box>
-      )}
+      )} */}
 
       <Box sx={inputWrapper}>
         <TextField

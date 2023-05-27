@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import {
   TextField,
@@ -11,8 +12,8 @@ import {
   LinearProgress,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { register } from 'redux/auth/operations';
 import { registerSchema } from 'schemas/registerSchema';
-import { useRegisterMutation } from 'services/wiseAutoApi';
 import { containedBtn, outlinedBtn } from 'shared/commonStyles';
 import {
   formWrapper,
@@ -33,9 +34,9 @@ const initialValues = {
 };
 
 export const RegisterForm = () => {
-  const [registerUser, { error, isError, isLoading, data }] = useRegisterMutation();
   const [showPassword, setShowPassword] = useState(false);
   const [step, setStep] = useState(1);
+  const dispatch = useDispatch();
 
   const maxSteps = 2;
 
@@ -44,13 +45,8 @@ export const RegisterForm = () => {
     validationSchema: registerSchema,
 
     onSubmit: async ({ email, password, name, city, phone }) => {
-      try {
-        await registerUser({ email, password, name, city, phone }).unwrap();
-      } catch (error) {
-        console.log(error.message);
-      }
+      dispatch(register({ email, password, name, city, phone }));
 
-      console.log(data);
       resetForm();
     },
   });
@@ -73,7 +69,7 @@ export const RegisterForm = () => {
         Step {step}/{maxSteps}
       </Typography>
 
-      {isLoading && (
+      {/* {isLoading && (
         <Box sx={{ width: '100%', mb: '24px' }}>
           <LinearProgress />
         </Box>
@@ -85,7 +81,7 @@ export const RegisterForm = () => {
             {error.message}
           </Typography>
         </Box>
-      )}
+      )} */}
 
       {step === 1 ? (
         <Box sx={inputWrapper}>

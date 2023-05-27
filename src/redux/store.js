@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/query';
 import storage from 'redux-persist/lib/storage';
 import {
   persistStore,
@@ -11,8 +10,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import { wiseAutoApi } from 'services/wiseAutoApi';
-import { authReducer } from './auth/authSlice';
+import { authReducer } from './auth/slice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -22,7 +20,6 @@ const authPersistConfig = {
 
 export const store = configureStore({
   reducer: {
-    [wiseAutoApi.reducerPath]: wiseAutoApi.reducer,
     auth: persistReducer(authPersistConfig, authReducer),
   },
 
@@ -31,9 +28,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(wiseAutoApi.middleware),
+    }),
 });
-
-setupListeners(store.dispatch);
 
 export const persistor = persistStore(store);

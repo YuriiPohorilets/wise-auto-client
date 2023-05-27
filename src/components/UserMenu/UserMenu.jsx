@@ -14,6 +14,7 @@ import { Logout } from '@mui/icons-material';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useAuth } from 'hooks/useAuth';
+import { logout } from 'redux/auth/operations';
 import { userMenuList } from 'refs/constants';
 import {
   menuWrapper,
@@ -23,7 +24,6 @@ import {
   menuList,
   menuItem,
 } from './userMenuStyles';
-import { logout } from 'redux/auth/authSlice';
 
 export const UserMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
